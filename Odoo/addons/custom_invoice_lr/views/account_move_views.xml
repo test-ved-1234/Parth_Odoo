@@ -5,7 +5,9 @@
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='invoice_date']" position="after">
-                <field name="lr_number"/>
+                <field name="x_lr_number"/>
+                <field name="x_lr_date"/>
+                <field name="x_transport"/>
             </xpath>
         </field>
     </record>

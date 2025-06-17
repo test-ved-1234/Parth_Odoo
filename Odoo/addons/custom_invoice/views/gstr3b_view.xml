@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_gstr3b_form" model="ir.ui.view">
+    <field name="name">gstr3b.report.form</field>
+    <field name="model">gstr3b.report</field>
+    <field name="arch" type="xml">
+      <form string="GSTR-3B Report">
+        <sheet>
+          <group>
+            <field name="name"/>
+            <field name="date_from"/>
+            <field name="date_to"/>
+          </group>
+          <group>
+            <field name="total_taxable" readonly="1"/>
+            <field name="total_igst" readonly="1"/>
+            <field name="total_cgst" readonly="1"/>
+            <field name="total_sgst" readonly="1"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record id="action_gstr3b_report" model="ir.actions.act_window">
+    <field name="name">GSTR-3B Report</field>
+    <field name="res_model">gstr3b.report</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+</odoo>

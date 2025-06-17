@@ -64,7 +64,8 @@
             </t>
         </xpath>
 
-        <xpath expr="//div[@id='payment_term']" position="after">
+        <!-- Vaidik commented code below to remove HSN Summary Part from Invoice PDF -->
+        <!-- <xpath expr="//div[@id='payment_term']" position="after">
             <t t-if="o.company_id.account_fiscal_country_id.code == 'IN'">
                 <t t-set="hsn_summary" t-value="o._l10n_in_get_hsn_summary_table()"/>
                 <t t-if="hsn_summary">
@@ -113,7 +114,7 @@
                     </div>
                 </t>
             </t>
-        </xpath>
+        </xpath> -->
 
     </template>
 

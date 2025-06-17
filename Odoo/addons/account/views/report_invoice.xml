@@ -3,11 +3,27 @@
     <data>
         <template id="report_invoice_document">
             <t t-call="web.external_layout">
+                <style>
+                    .tight-table tr,
+                    .tight-table td,
+                    .tight-table th {
+                                        padding: 3px 9px;
+                                        margin: 0;
+                                        line-height: 1.2;
+                                        vertical-align: middle;
+                                        font-size: 14px;
+                    }
+                    .tight-table div {  
+                                        <!-- padding: 2px 2px; -->
+                                        margin: 0;
+                                        font-size: 14px;
+                    }
+                </style>
                 <t t-set="o" t-value="o.with_context(lang=lang)" />
                 <t t-set="forced_vat" t-value="o.fiscal_position_id.foreign_vat"/> <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
                 <div class="row">
                     <t t-if="o.partner_shipping_id and (o.partner_shipping_id != o.partner_id)">
-                        <div class="col-6">
+                        <div class="tight-table col-6">
                             <t t-set="information_block">
                                 <div groups="account.group_delivery_invoice_address" name="shipping_address_block">
                                     <strong class="d-block mt-3">Shipping Address</strong>
@@ -15,7 +31,7 @@
                                 </div>
                             </t>
                         </div>
-                        <div class="col-6" name="address_not_same_as_shipping">
+                        <div class="tight-table col-6" name="address_not_same_as_shipping">
                             <t t-set="address">
                                 <address class="mb-0" t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
                                 <div t-if="o.partner_id.vat" id="partner_vat_address_not_same_as_shipping">
@@ -26,7 +42,7 @@
                         </div>
                     </t>
                     <t t-elif="o.partner_shipping_id and (o.partner_shipping_id == o.partner_id)">
-                        <div class="offset-col-6 col-6" name="address_same_as_shipping">
+                        <div class="tight-table offset-col-6 col-6" name="address_same_as_shipping">
                             <t t-set="address">
                                 <address class="mb-0" t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
                                 <div t-if="o.partner_id.vat" id="partner_vat_address_same_as_shipping">
@@ -37,7 +53,7 @@
                         </div>
                     </t>
                     <t t-else="">
-                        <div class="offset-col-6 col-6" name="no_shipping">
+                        <div class="tight-table offset-col-6 col-6" name="no_shipping">
                             <t t-set="address">
                                 <address class="mb-0" t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
                                 <div t-if="o.partner_id.vat" id="partner_vat_no_shipping">
@@ -48,7 +64,7 @@
                         </div>
                     </t>
                 </div>
-                <div class="clearfix invoice_main">
+                <div class="tight-table clearfix invoice_main">
                     <div class="page mb-4">
                         <t t-set="layout_document_title">
                             <span t-if="not proforma"></span>
@@ -65,7 +81,7 @@
                         </t>
                         <div class="oe_structure"></div>
                         <div
-                            id="informations" class="row mb-4"
+                            id="informations" class="row tight-table mb-4"
                             t-if="o.invoice_date or (o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted') or o.delivery_date or o.invoice_origin or o.partner_id.ref or o.ref or o.invoice_incoterm_id">
                             <div class="col" t-if="o.invoice_date" name="invoice_date">
                                 <t t-if="o.move_type == 'out_invoice'"><strong>Invoice Date</strong></t>
@@ -106,7 +122,7 @@
 
                         <t t-set="display_discount" t-value="any(l.discount for l in o.invoice_line_ids)"/>
                         <div class="oe_structure"></div>
-                        <table class="o_has_total_table table o_main_table table-borderless" name="invoice_line_table">
+                        <table class="o_has_total_table tight-table table o_main_table table-borderless" name="invoice_line_table">
                             <thead>
                                 <tr>
                                     <th name="th_description" class="text-start"><span>Description</span></th>
@@ -185,7 +201,7 @@
                             <div id="right-elements" t-attf-class="#{'col-5' if report_type != 'html' else 'col-12 col-md-5'} ms-5 d-inline-block float-end">
                                 <div id="total" class="clearfix row mt-n3">
                                     <div class="ms-auto">
-                                        <table class="o_total_table table table-borderless avoid-page-break-inside">
+                                        <table class="o_total_table tight-table table table-borderless avoid-page-break-inside">
 
                                             <!-- Tax totals summary (invoice currency) -->
                                             <t t-if="o.tax_totals" t-call="account.document_tax_totals">
@@ -394,7 +410,7 @@
             <t t-set="currency" t-value="o.company_currency_id"/>
             <t t-set="same_tax_base" t-value="tax_totals['same_tax_base']"/>
             <div class="mb-2 mt-3 border p-2 avoid-page-break-inside totals_taxes_company_currency">
-                <table class="o_total_table table table-borderless mb-0">
+                <table class="o_total_table tight-table table table-borderless mb-0">
                     <p class="tax_computation_company_currency">
                         Taxes <span t-field="o.company_currency_id"/>
                     </p>

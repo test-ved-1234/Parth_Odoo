@@ -117,8 +117,22 @@ class AccountMove(models.Model):
     # ==============================================================================================
     #                                          JOURNAL ENTRY
     # ==============================================================================================
-
+    
     # === Accounting fields === #
+
+    # Vaidik's variable
+    # ==============================================================================================
+    # x_final_total_monetory = fields.Monetary(
+    #                             string='Final Total Money', 
+    #                             compute='_custom_compute_final_total',
+    #                             store=True
+    #                             ) 
+    # x_rounded = fields.Float(
+    #                         string = 'Rounding',
+    #                         compute='_custom_compute_final_total',
+    #                         store=True
+    #                         )
+    # ==============================================================================================
     name = fields.Char(
         string='Number',
         compute='_compute_name', inverse='_inverse_name', readonly=False, store=True,
@@ -648,7 +662,7 @@ class AccountMove(models.Model):
     invoice_cash_rounding_id = fields.Many2one(
         comodel_name='account.cash.rounding',
         string='Cash Rounding Method',
-        help='Defines the smallest coinage of the currency that can be used to pay by cash.',
+        help='Defines the smallest coinage of the currency that can be used to pay by cash.'
     )
     sending_data = fields.Json(copy=False)
     invoice_pdf_report_id = fields.Many2one(
@@ -1938,6 +1952,14 @@ class AccountMove(models.Model):
     def _compute_amount_total_words(self):
         for move in self:
             move.amount_total_words = move.currency_id.amount_to_text(move.amount_total).replace(',', '')
+    # Vaidik's Code
+    # ==============================================================================================
+    # @api.depends('amount_total')
+    # def _custom_compute_final_total(self):
+    #     for move in self:
+    #         # move.x_rounded = -round(move.amount_total - round(move.amount_total),2)
+    #         move.x_final_total_monetory = round(move.amount_total)
+    # ==============================================================================================
 
     def _compute_linked_attachment_id(self, attachment_field, binary_field):
         """Helper to retreive Attachment from Binary fields
@@ -6296,3 +6318,4 @@ class AccountMove(models.Model):
         :returns: True if commit is acceptable, False otherwise.
         """
         return not tools.config['test_enable'] and not modules.module.current_test
+    

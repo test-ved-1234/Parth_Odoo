@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_document_inherit_lr_number" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[@class='mb-3']" position="after">
+            <t t-if="o.x_transport">
+                <div style="margin-bottom: 1px;">
+                    Transport:
+                    <span t-esc="o.x_transport"/>
+                </div>
+            </t>
+            <t t-if="o.x_lr_number">
+                <div style="margin-bottom: 1px;">
+                    LR Number:
+                    <span t-esc="o.x_lr_number"/>
+                </div>
+            </t>
+            <t t-if="o.x_lr_date">
+                <div style="margin-bottom: 3px;">
+                    LR Date:
+                    <span t-esc="o.x_lr_date"/>
+                </div>
+            </t>
+        </xpath>
+        <xpath expr="//div[@class='mb-2']" position="before">
+            <table class="o_total_table tight-table table table-borderless avoid-page-break-inside">
+                <tr t-if="o.x_rounded">
+                    <td style="margin-bottom: 6px;">
+                        Rounding
+                    </td>
+                    <td style="text-align: right">
+                        &#8377; <t t-out="o.x_rounded"/>
+                    </td>
+                </tr>
+                <tr t-if="o.x_rounded" style = 'background-color:rgb(204, 204, 204);'>
+                    <td style="margin-bottom: 6px;">
+                        <strong>Final Amount</strong>
+                    </td>
+                    <td style="text-align: right">
+                        <strong>&#8377; <t t-out="o.x_final_total_monetory"/></strong>
+                    </td>
+                </tr>
+            </table>
+        </xpath>
+    </template>
+</odoo>

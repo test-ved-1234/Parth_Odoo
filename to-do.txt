@@ -1,0 +1,17 @@
+1. Create a Purchase Order that has only amount not the details of which product and all.
+    Requirements:
+    > Their PO is amount + GST and name of vendor, not specific with which products and quantity with price.
+        a. Check Jayshree Purchase orders at least 3-5.
+        b. Understand the pattern of the Odoo PO creation.
+        c. Impliment it to Odoo.
+
+2. Make Invoices GST compliant.
+    Requirements:
+    > They are using GSTR-3B bills - Monthly.
+    > It requires PO with GST, Invoices with GST. 
+        > These details with GSTR-3B calculation and final amount of GST.
+    a. Understand how Jayshree files Invoice.
+    b. Check their pervious files that how it shows.
+    c. Replicate it to Odoo.
+        i. Find or develope modules that are needed.
+        ii. Test it on monthly GST.

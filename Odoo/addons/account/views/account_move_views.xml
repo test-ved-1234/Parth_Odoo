@@ -3,7 +3,6 @@
     <data>
 
         <!-- VIEWS -->
-
         <!-- account.move.line (Journal items) -->
         <record id="view_move_line_form" model="ir.ui.view">
             <field name="name">account.move.line.form</field>
